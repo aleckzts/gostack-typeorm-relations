@@ -1,0 +1,21 @@
+version: '3'
+services:
+  db:
+    image: postgres
+    container_name: gostack_desafio09
+    restart: always
+    tty: true
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./pg-init-scripts:/docker-entrypoint-initdb.d
+    environment:
+      - POSTGRES_MULTIPLE_DATABASES=gostack_desafio09,gostack_desafio09_tests
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=docker
+    networks:
+      - app-network
+
+networks:
+    app-network:
+        driver: bridge
